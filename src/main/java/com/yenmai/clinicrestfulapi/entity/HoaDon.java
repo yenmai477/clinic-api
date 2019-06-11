@@ -39,7 +39,7 @@ public class HoaDon {
     @JsonProperty("maBenhNhan")
     private BenhNhan benhNhan;
 
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(fetch=FetchType.LAZY, mappedBy="hoaDon", cascade = CascadeType.ALL)
     List<ChiTietDonThuoc> chiTietDonThuocs;
 

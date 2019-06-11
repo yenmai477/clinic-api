@@ -34,7 +34,7 @@ public class ChiTietDonThuoc {
 
     @ManyToOne(cascade ={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="MATHUOC")
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="maThuoc")
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="tenThuoc")
     @JsonIdentityReference(alwaysAsId=true)
     @JsonProperty("maThuoc")
     private Thuoc thuoc;

@@ -27,7 +27,7 @@ public class DangKiKhamBenh {
 
     @ManyToOne(cascade ={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="MABENHNHAN")
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="maBenhNhan")
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="tenBenhNhan")
     @JsonIdentityReference(alwaysAsId=true)
     @JsonProperty("maBenhNhan")
     private BenhNhan benhNhan;
