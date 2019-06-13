@@ -34,6 +34,9 @@ public class DangKiKhamBenh {
 
 
     @OneToOne(mappedBy="dangKiKhamBenh", cascade=CascadeType.ALL)
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="maPhieuKham")
+    @JsonIdentityReference(alwaysAsId=true)
+    @JsonProperty("maPhieuKham")
     private PhieuKhamBenh phieuKhamBenh;
 
 

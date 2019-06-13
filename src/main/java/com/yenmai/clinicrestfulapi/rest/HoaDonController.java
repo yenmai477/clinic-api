@@ -1,6 +1,7 @@
 package com.yenmai.clinicrestfulapi.rest;
 
 import com.yenmai.clinicrestfulapi.entity.HoaDon;
+import com.yenmai.clinicrestfulapi.model.HoaDonDTO;
 import com.yenmai.clinicrestfulapi.service.HoaDonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,11 +52,14 @@ public class HoaDonController {
 
 
     @PutMapping
-    public HoaDon updateHoaDon(@RequestBody HoaDon theHoaDon) {
+    public HoaDon updateHoaDon(@RequestBody HoaDonDTO theHoaDonDTO) {
 
-        hoaDonService.save(theHoaDon);
+        HoaDon tempHoaDon = null;
+        tempHoaDon = hoaDonService.findById(theHoaDonDTO.getMaHoaDon());
+        tempHoaDon.setTinhTrang("Đã thanh toán");
+        hoaDonService.save(tempHoaDon);
 
-        return theHoaDon;
+        return tempHoaDon;
     }
 
 

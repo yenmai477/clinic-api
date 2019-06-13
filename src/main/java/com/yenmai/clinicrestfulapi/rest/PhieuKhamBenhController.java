@@ -4,6 +4,7 @@ import com.yenmai.clinicrestfulapi.entity.ChiTietDonThuoc;
 import com.yenmai.clinicrestfulapi.entity.HoaDon;
 import com.yenmai.clinicrestfulapi.entity.PhieuKhamBenh;
 import com.yenmai.clinicrestfulapi.model.PhieuKhamBenhDTO;
+import com.yenmai.clinicrestfulapi.model.PhieuKhamBenhResponseDTO;
 import com.yenmai.clinicrestfulapi.model.PhieuKhamResponseDTO;
 import com.yenmai.clinicrestfulapi.service.ChiTietDonThuocService;
 import com.yenmai.clinicrestfulapi.service.HoaDonService;
@@ -47,15 +48,36 @@ public class PhieuKhamBenhController {
 
 
     @GetMapping("/{maPhieuKham}")
-    public PhieuKhamBenh getPhieuKham(@PathVariable int maPhieuKham) {
+    public PhieuKhamBenhResponseDTO getPhieuKham(@PathVariable int maPhieuKham) {
 
         PhieuKhamBenh thePhieuKham = phieuKhamBenhService.findById(maPhieuKham);
+
 
         if (thePhieuKham == null) {
             throw new RuntimeException("Không tìm thấy phiếu khám bệnh có mã - " + maPhieuKham);
         }
 
-        return thePhieuKham;
+        PhieuKhamBenhResponseDTO tempDTO= new PhieuKhamBenhResponseDTO();
+
+        tempDTO.setMaPhieuKham(thePhieuKham.getMaPhieuKham());
+
+        tempDTO.setChuanDoan(thePhieuKham.getChuanDoan());
+
+        tempDTO.setTrieuChung(thePhieuKham.getTrieuChung());
+
+        tempDTO.setTrieuChung(thePhieuKham.getTrieuChung());
+
+        tempDTO.setTenBenhNhan(thePhieuKham.getDangKiKhamBenh().getBenhNhan().getTenBenhNhan());
+
+        tempDTO.setDiaChi(thePhieuKham.getDangKiKhamBenh().getBenhNhan().getDiaChi());
+
+        tempDTO.setTenBacSi(thePhieuKham.getBacSi().getTenNhanVien());
+
+        tempDTO.setChiTietDonThuocList(thePhieuKham.getChiTietDonThuocs());
+
+        tempDTO.setNgayThem(thePhieuKham.getNgayThem());
+
+        return tempDTO;
     }
 
 
