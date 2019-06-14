@@ -5,6 +5,7 @@ import com.yenmai.clinicrestfulapi.service.BenhNhanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class BenhNhanRestController {
      * @return
      */
     @GetMapping
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public List<BenhNhan> findAll(@RequestParam(value = "name", required = false) String tenBenhNhan){
         if (tenBenhNhan!=null) {
             return benhNhanService.findByTenBenhNhanLike(tenBenhNhan);
