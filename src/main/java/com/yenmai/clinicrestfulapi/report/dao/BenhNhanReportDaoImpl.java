@@ -60,6 +60,8 @@ public class BenhNhanReportDaoImpl {
         final Map<String, Object> parameters = new HashMap<>();
 
         parameters.put("logo", getClass().getResourceAsStream(logo_path));
+        parameters.put("thangBaoCao", thangThem);
+        parameters.put("namBaoCao", namThem);
         parameters.put("ItemDataSource",  benhNhanRespository.findBenhNhanByThangThem(thangThem,namThem));
 
         return parameters;

@@ -5,12 +5,14 @@ import com.yenmai.clinicrestfulapi.service.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/nhanvien")
+@PreAuthorize("hasRole('ADMIN')")
 public class NhanVienRestController {
 	private NhanVienService nhanVienService;
 	

@@ -43,6 +43,8 @@
 	</subDataset>
 	<parameter name="ItemDataSource" class="java.util.List"/>
 	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="thangBaoCao" class="java.lang.Integer"/>
+	<parameter name="namBaoCao" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -54,7 +56,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="163" splitType="Stretch">
+		<band height="171" splitType="Stretch">
 			<staticText>
 				<reportElement x="480" y="9" width="300" height="20" uuid="8294d2b2-aa95-4527-8b6b-56e0f34fc762"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -83,17 +85,17 @@
 				</textElement>
 				<text><![CDATA[Website: https://www.phongkhamnhanviet.com]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="0" y="129" width="802" height="30" uuid="081d9caf-bb69-47dd-ba9e-3bf0effb486b"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="18" isBold="true"/>
-				</textElement>
-				<text><![CDATA[DANH SÁCH BỆNH NHÂN]]></text>
-			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="110" height="110" uuid="2266ddb4-44dc-4abe-82c8-241dc1d85f38"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement x="0" y="141" width="802" height="30" uuid="6cd03dd7-f193-4df8-b1d6-2c4d608998b1"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DANH SÁCH BỆNH NHÂN MỚI THÁNG " + $P{thangBaoCao} + "/" + $P{namBaoCao}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<detail>
@@ -242,21 +244,21 @@
 	<lastPageFooter>
 		<band height="76">
 			<textField evaluationTime="Report" pattern="MMMMM dd, yyyy" isBlankWhenNull="true">
-				<reportElement x="560" y="0" width="260" height="20" uuid="9da6a752-c525-48d9-ab90-f883e3283f45"/>
+				<reportElement x="491" y="0" width="260" height="20" uuid="9da6a752-c525-48d9-ab90-f883e3283f45"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Hồ Chí Minh, " + "ngày " + $V{now}.substring(0, 2) + " tháng " + $V{now}.substring(2, 4) + " năm " + $V{now}.substring(4) + "."]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="571" y="20" width="220" height="20" uuid="adac96cd-f9a9-4cd8-8d9d-38a5558a7499"/>
+				<reportElement x="502" y="20" width="220" height="20" uuid="adac96cd-f9a9-4cd8-8d9d-38a5558a7499"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[NGƯỜI LẬP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="577" y="39" width="215" height="21" uuid="802fa2c8-d387-41f8-baff-f2f91a1f7c59"/>
+				<reportElement x="508" y="39" width="215" height="21" uuid="802fa2c8-d387-41f8-baff-f2f91a1f7c59"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="10" isItalic="true"/>
 				</textElement>

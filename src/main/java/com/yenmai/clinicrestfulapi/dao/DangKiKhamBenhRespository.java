@@ -18,5 +18,10 @@ public interface DangKiKhamBenhRespository extends JpaRepository<DangKiKhamBenh,
 
     List<DangKiKhamBenh> findDangKiKhamBenhByTinhTrang(String tinhTrang);
 
+    @Query( value = "select * from DangKiKhamBenh "
+            + "where year(ngaydangki) = :namThem "
+            + "and month(ngaydangki) = :thangThem "
+            + "order by ngaydangki", nativeQuery = true)
+    List<DangKiKhamBenh> findByThangThem(int thangThem, int namThem);
 
 }

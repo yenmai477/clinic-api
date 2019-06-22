@@ -13,6 +13,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/benhnhan")
+@PreAuthorize("hasRole('EMPLOYEE') or hasRole('ADMIN')")
 public class BenhNhanRestController {
     private BenhNhanService benhNhanService;
 
@@ -27,7 +28,6 @@ public class BenhNhanRestController {
      * @return
      */
     @GetMapping
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public List<BenhNhan> findAll(@RequestParam(value = "name", required = false) String tenBenhNhan){
         if (tenBenhNhan!=null) {
             return benhNhanService.findByTenBenhNhanLike(tenBenhNhan);

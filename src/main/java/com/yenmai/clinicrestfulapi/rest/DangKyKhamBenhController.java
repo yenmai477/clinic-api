@@ -6,6 +6,7 @@ import com.yenmai.clinicrestfulapi.service.DangKiKhamBenhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class DangKyKhamBenhController {
 
     //Tìm tất cả đăng kí khám bệnh hoặc tìm tất cả đăng kí khám bệnh theo tình trạng
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
     public List<DangKiKhamBenh> findAll(
             @RequestParam(value = "tinhTrang", required = false) String tinhTrang,
             @RequestParam(value = "maBenhNhan", defaultValue = "0", required = false) int maBenhNhan){
@@ -44,6 +46,7 @@ public class DangKyKhamBenhController {
 
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('EMPLOYEE') ")
     public DangKiKhamBenh addDangKiKhamBenh(@RequestBody DangKiKhamBenhDTO theDangKi) {
 
         // also just in case they pass an id in JSON ... set id to 0
@@ -59,6 +62,7 @@ public class DangKyKhamBenhController {
 
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
     public DangKiKhamBenh updateDangKiKhamBenh(@RequestBody DangKiKhamBenhDTO theDangKi) {
         DangKiKhamBenh tempDangKi = new DangKiKhamBenh();
         tempDangKi = dangKiKhamBenhService.createDangKiKhamBenh(theDangKi);
@@ -68,6 +72,7 @@ public class DangKyKhamBenhController {
 
 
     @DeleteMapping("/{maDangKi}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
     public ResponseEntity<DangKiKhamBenh> deleteDangKiKhamBenh(@PathVariable int maDangKi) {
 
         DangKiKhamBenh tempDangKi = dangKiKhamBenhService.findById(maDangKi);

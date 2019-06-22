@@ -10,14 +10,16 @@ import com.yenmai.clinicrestfulapi.service.ChiTietDonThuocService;
 import com.yenmai.clinicrestfulapi.service.HoaDonService;
 import com.yenmai.clinicrestfulapi.service.PhieuKhamBenhService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping("/api/phieukhambenh")
+@PreAuthorize("hasRole('DOCTOR') or hasRole('ADMIN')")
 public class PhieuKhamBenhController {
     @Autowired
     private PhieuKhamBenhService phieuKhamBenhService;

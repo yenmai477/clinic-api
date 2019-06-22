@@ -1,8 +1,7 @@
 package com.yenmai.clinicrestfulapi.report.dao;
 
-import com.yenmai.clinicrestfulapi.dao.ChiTietDonThuocRespository;
-import com.yenmai.clinicrestfulapi.dao.ThuocRespository;
-import com.yenmai.clinicrestfulapi.entity.ChiTietDonThuoc;
+import com.yenmai.clinicrestfulapi.dao.HoaDonRespository;
+import com.yenmai.clinicrestfulapi.entity.HoaDon;
 import com.yenmai.clinicrestfulapi.report.service.BenhNhanReportService;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -25,17 +24,15 @@ import java.util.*;
  */
 
 @Repository
-public class ThuocDaDungReportDaoImpl {
+public class DoanhThuReportDaoImpl {
     Logger log = LogManager.getLogger(BenhNhanReportService.class);
 
     private static final String logo_path = "/jasper/images/logo.jpg";
-    private final String report_template = "/jasper/ThuocDungTrongThang.jrxml";
+    private final String report_template = "/jasper/DoanhThuTheoThang.jrxml";
 
     @Autowired
-    ChiTietDonThuocRespository chiTietDonThuocRespository;
+    HoaDonRespository hoaDonRespository;
 
-    @Autowired
-    ThuocRespository thuocRespository;
 
 
     public void generateReportFor(int thangBaoCao, int namBaoCao) throws IOException {
@@ -70,6 +67,7 @@ public class ThuocDaDungReportDaoImpl {
         parameters.put("logo", getClass().getResourceAsStream(logo_path));
         parameters.put("thangBaoCao", thangBaoCao);
         parameters.put("namBaoCao", namBaoCao);
+        log.info(thangBaoCao+"/" + namBaoCao);
         return parameters;
     }
 
@@ -78,20 +76,17 @@ public class ThuocDaDungReportDaoImpl {
     private List<Map<String, Object>> fieldReport(int thangBaoCao, int namBaoCao) {
         List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
 
-        for (ChiTietDonThuoc chiTietDonThuoc : chiTietDonThuocRespository.findByThangThem(thangBaoCao, namBaoCao)) {
+        for (HoaDon hoaDon : hoaDonRespository.findByThangThem(thangBaoCao, namBaoCao)) {
             Map<String, Object> item = new HashMap<String, Object>();
-            item.put("ngayKham", chiTietDonThuoc.getNgayThem());
-            item.put("tenThuoc", chiTietDonThuoc.getThuoc().getTenThuoc());
-            item.put("giaThuoc", chiTietDonThuoc.getThuoc().getGia());
-            item.put("soLuong", chiTietDonThuoc.getSoLuong());
-            item.put("thanhTien", chiTietDonThuoc.getThanhTien());
-            item.put("maThuoc", chiTietDonThuoc.getThuoc().getMaThuoc());
+            item.put("maHoaDon", hoaDon.getMaHoaDon());
+            item.put("ngayThem", hoaDon.getNgayThem());
+            item.put("tenBenhNhan", hoaDon.getBenhNhan().getTenBenhNhan());
+            item.put("tinhTrang", hoaDon.getTinhTrang());
+            item.put("thanhTien", hoaDon.getThanhTien());
+
             result.add(item);
         }
 
-//        parameters.put("ngayThem",)
-//        parameters.put("namBaoCao", namBaoCao);
-//        parameters.put("thangBaoCao", thangBaoCao);
 
         return result;
     }

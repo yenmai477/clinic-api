@@ -5,6 +5,7 @@ import com.yenmai.clinicrestfulapi.model.ChiTietDonThuocDTO;
 import com.yenmai.clinicrestfulapi.service.ChiTietDonThuocService;
 import com.yenmai.clinicrestfulapi.service.HoaDonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/chitietdonthuoc")
+@PreAuthorize("hasRole('DOCTOR') or hasRole('ADMIN')")
 public class ChiTietDonThuocController {
     @Autowired
     private ChiTietDonThuocService chiTietDonThuocService;

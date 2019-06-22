@@ -16,4 +16,10 @@ public interface HoaDonRespository extends JpaRepository<HoaDon, Integer> {
             + "order by month(ngaythem) ", nativeQuery = true)
     List<GroupByResult> doanhThuTheoThangTrongNam(int namThem);
 
+    @Query( value = "select * from HoaDon "
+            + "where year(ngaythem) = :namThem "
+            + "and month(ngaythem) = :thangThem "
+            + "order by ngaythem", nativeQuery = true)
+    List<HoaDon> findByThangThem(int thangThem, int namThem);
+
 }

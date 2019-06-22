@@ -4,12 +4,14 @@ import com.yenmai.clinicrestfulapi.entity.HoaDon;
 import com.yenmai.clinicrestfulapi.model.HoaDonDTO;
 import com.yenmai.clinicrestfulapi.service.HoaDonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/hoadon")
+@PreAuthorize("hasRole('EMPLOYEE') or hasRole('ADMIN')")
 public class HoaDonController {
     @Autowired
     private HoaDonService hoaDonService;
