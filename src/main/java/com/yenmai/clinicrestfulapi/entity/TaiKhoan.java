@@ -25,7 +25,7 @@ public class TaiKhoan {
     @Column(name="QUYEN")
     private String quyen;
 
-    @OneToOne(cascade= CascadeType.ALL)
+    @OneToOne(cascade= CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="MANHANVIEN")
     @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="maDangKi")
     @JsonIdentityReference(alwaysAsId=true)

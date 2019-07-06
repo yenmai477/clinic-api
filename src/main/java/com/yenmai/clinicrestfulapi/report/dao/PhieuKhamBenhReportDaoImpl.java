@@ -77,7 +77,10 @@ public class PhieuKhamBenhReportDaoImpl {
         parameters.put("logo", getClass().getResourceAsStream(logo_path));
         //Cần tạo kiểu dữ liệu để thực hiện báo cáo
         List<HoadonTable> hoadonTables = new ArrayList<>();
-        List<ChiTietDonThuoc> chiTietDonThuocs = chiTietDonThuocRespository.findByPhieuKhamBenh(maPhieuKham);
+
+        PhieuKhamBenh tempPhieuKham = phieuKhamBenhRespository.findById(maPhieuKham).get();
+
+        List<ChiTietDonThuoc> chiTietDonThuocs = tempPhieuKham.getChiTietDonThuocs();
         //Chưa viết tìm tất cả đơn thuốc của hóa đơn
         System.out.println(chiTietDonThuocs.size());
         for (int i = 0; i < chiTietDonThuocs.size(); i++){
@@ -93,7 +96,7 @@ public class PhieuKhamBenhReportDaoImpl {
 
         }
 
-        PhieuKhamBenh tempPhieuKham = chiTietDonThuocs.get(0).getPhieuKhamBenh();
+
         BenhNhan tempBenhNhan = tempPhieuKham.getDangKiKhamBenh().getBenhNhan();
 
         parameters.put("ItemDataSource", hoadonTables);

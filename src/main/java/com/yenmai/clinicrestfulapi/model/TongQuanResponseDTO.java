@@ -1,5 +1,8 @@
 package com.yenmai.clinicrestfulapi.model;
 
+import com.yenmai.clinicrestfulapi.entity.BenhNhan;
+import com.yenmai.clinicrestfulapi.entity.NhanVien;
+
 import java.util.List;
 
 /**
@@ -15,13 +18,10 @@ public class TongQuanResponseDTO {
 
     private List<GroupByValueDTO> tyleChucVu;
 
-    public TongQuanResponseDTO(CardInfoDTO cardInfoDTO, List<GroupByValueDTO> doanhThuTheoThang,
-                               List<GroupByValueDTO> tyleGioiTinh, List<GroupByValueDTO> tyleChucVu) {
-        this.cardInfoDTO = cardInfoDTO;
-        this.doanhThuTheoThang = doanhThuTheoThang;
-        this.tyleGioiTinh = tyleGioiTinh;
-        this.tyleChucVu = tyleChucVu;
-    }
+    private List<NhanVien> randomNhanVien;
+
+    private  List<BenhNhan> benhNhanMoi;
+
 
     public TongQuanResponseDTO() {
     }
@@ -56,5 +56,21 @@ public class TongQuanResponseDTO {
 
     public void setTyleChucVu(List<GroupByValueDTO> tyleChucVu) {
         this.tyleChucVu = tyleChucVu;
+    }
+
+    public List<NhanVien> getRandomNhanVien() {
+        return randomNhanVien;
+    }
+
+    public void setRandomNhanVien(List<NhanVien> randomNhanVien) {
+        this.randomNhanVien = randomNhanVien;
+    }
+
+    public List<BenhNhan> getBenhNhanMoi() {
+        return benhNhanMoi;
+    }
+
+    public void setBenhNhanMoi(List<BenhNhan> benhNhanMoi) {
+        this.benhNhanMoi = benhNhanMoi;
     }
 }

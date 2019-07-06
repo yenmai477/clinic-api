@@ -59,10 +59,6 @@ public class PhieuKhamBenhServiceImpl implements PhieuKhamBenhService {
     public PhieuKhamBenh findByDangKiKhamBenh(int maDangKi) {
         PhieuKhamBenh result = phieuKhamBenhRespository.findByDangKiKhamBenh(maDangKi);
 
-        if(result == null){
-            throw new RuntimeException("Không tìm thấy phiếu khám có mã - " + maDangKi);
-        }
-
         return result;
     }
 

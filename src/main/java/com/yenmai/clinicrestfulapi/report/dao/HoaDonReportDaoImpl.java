@@ -5,6 +5,7 @@ import com.yenmai.clinicrestfulapi.dao.HoaDonRespository;
 import com.yenmai.clinicrestfulapi.dao.ThuocRespository;
 import com.yenmai.clinicrestfulapi.entity.BenhNhan;
 import com.yenmai.clinicrestfulapi.entity.ChiTietDonThuoc;
+import com.yenmai.clinicrestfulapi.entity.HoaDon;
 import com.yenmai.clinicrestfulapi.report.model.HoadonTable;
 import com.yenmai.clinicrestfulapi.report.service.BenhNhanReportService;
 import net.sf.jasperreports.engine.*;
@@ -76,7 +77,10 @@ public class HoaDonReportDaoImpl {
         parameters.put("logo", getClass().getResourceAsStream(logo_path));
         //Cần tạo kiểu dữ liệu để thực hiện báo cáo
         List<HoadonTable> hoadonTables = new ArrayList<>();
-        List<ChiTietDonThuoc> chiTietDonThuocs = chiTietDonThuocRespository.findByHoaDon(maHoaDon);
+
+        HoaDon  tempHoaDon = hoaDonRespository.findById(maHoaDon).get();
+
+        List<ChiTietDonThuoc> chiTietDonThuocs = tempHoaDon.getChiTietDonThuocs();
         //Chưa viết tìm tất cả đơn thuốc của hóa đơn
         int tienThuoc = 0;
         for (int i = 0; i < chiTietDonThuocs.size(); i++){
@@ -93,7 +97,7 @@ public class HoaDonReportDaoImpl {
 
         }
 
-        BenhNhan tempBenhNhan = chiTietDonThuocs.get(0).getHoaDon().getBenhNhan();
+        BenhNhan tempBenhNhan = tempHoaDon.getBenhNhan();
 
         parameters.put("ItemDataSource", hoadonTables);
         parameters.put("maKhachHang", tempBenhNhan.getMaBenhNhan());
@@ -105,11 +109,10 @@ public class HoaDonReportDaoImpl {
         parameters.put("diaChi",tempBenhNhan.getDiaChi());
         System.out.println(tempBenhNhan.getDiaChi());
         parameters.put("soHoaDon", maHoaDon);
-        System.out.println(maHoaDon);
-        parameters.put("tienKham",3000000);
+        parameters.put("tienKham",300000);
         parameters.put("tienThuoc",tienThuoc);
         System.out.println(tienThuoc);
-        parameters.put("tongTien",3000000 + tienThuoc);
+        parameters.put("tongTien",300000 + tienThuoc);
         return parameters;
     }
 

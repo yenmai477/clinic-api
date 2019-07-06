@@ -23,6 +23,7 @@ public class NhanVienRestController {
 
 	// expose "/nhanvien" and return list of nhanvien
 	@GetMapping
+	@PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
 	public List<NhanVien> findAll(@RequestParam(value = "name", required = false) String tenNhanVien){
 		if (tenNhanVien!=null) {
 			return nhanVienService.findByTenNhanVienLike(tenNhanVien);

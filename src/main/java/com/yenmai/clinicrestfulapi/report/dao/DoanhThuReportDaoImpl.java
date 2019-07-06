@@ -80,7 +80,7 @@ public class DoanhThuReportDaoImpl {
             Map<String, Object> item = new HashMap<String, Object>();
             item.put("maHoaDon", hoaDon.getMaHoaDon());
             item.put("ngayThem", hoaDon.getNgayThem());
-            item.put("tenBenhNhan", hoaDon.getBenhNhan().getTenBenhNhan());
+            item.put("tenKhachHang", hoaDon.getBenhNhan().getTenBenhNhan());
             item.put("tinhTrang", hoaDon.getTinhTrang());
             item.put("thanhTien", hoaDon.getThanhTien());
 

@@ -88,9 +88,17 @@ public class PhieuKhamBenhController {
     public PhieuKhamResponseDTO addPhieuKham(
             @RequestBody PhieuKhamBenhDTO thePhieuKhamDTO) {
 
-        // also just in case they pass an id in JSON ... set id to 0
-        // this is to force a save of new item ... instead of update
-        //Chuyển Phiếu khám bệnh từ DTO --->Entity
+        System.out.println(thePhieuKhamDTO.getMaDangKi());
+
+       //Kiểm tra phiếu khám bệnh của mã đăng kí có tồn tại hay chưa
+        PhieuKhamBenh tempKiemTra = phieuKhamBenhService
+                                        .findByDangKiKhamBenh(thePhieuKhamDTO.getMaDangKi());
+
+        if (tempKiemTra != null) {
+            throw new RuntimeException("Đăng kí khám bệnh đã được khám, không thể tạo thêm phiếu khám bệnh");
+        }
+
+
         PhieuKhamBenh tempPhieuKham = new PhieuKhamBenh();
         tempPhieuKham = phieuKhamBenhService.createorUpdatePhieuKhamBenh(tempPhieuKham, thePhieuKhamDTO);
 

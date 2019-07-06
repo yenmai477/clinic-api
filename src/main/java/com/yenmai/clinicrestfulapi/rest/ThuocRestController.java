@@ -24,6 +24,7 @@ public class ThuocRestController {
 
 
     @GetMapping
+    @PreAuthorize("hasRole('PHARMACIST') or hasRole('ADMIN') or hasRole('DOCTOR')")
     public List<Thuoc> findAll(){
         return thuocService.findAll();
     }

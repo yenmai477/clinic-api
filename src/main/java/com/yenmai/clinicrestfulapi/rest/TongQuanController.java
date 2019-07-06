@@ -48,6 +48,8 @@ public class TongQuanController {
         tempResponseDTO.setDoanhThuTheoThang(tongQuanService.getDoanhThuTheoThang());
         tempResponseDTO.setTyleChucVu(tongQuanService.getNhanVienTheoChucVu());
         tempResponseDTO.setTyleGioiTinh(tongQuanService.getBenhNhanTheoGioiTinh());
+        tempResponseDTO.setRandomNhanVien(tongQuanService.randomNhanVien());
+        tempResponseDTO.setBenhNhanMoi(tongQuanService.findBenhNhanMoiNhat());
         return tempResponseDTO;
     }
 

@@ -22,4 +22,8 @@ public interface BenhNhanRespository extends JpaRepository<BenhNhan, Integer> {
     List<GroupByResult> groupBenhNhanByGioiTinh();
 
 
+    @Query( value = "select  * from BENHNHAN order by ngaythem desc limit 10",
+            nativeQuery = true)
+    List<BenhNhan> findBenhNhanMoiNhat();
+
 }

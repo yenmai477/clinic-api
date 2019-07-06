@@ -1,5 +1,7 @@
 package com.yenmai.clinicrestfulapi.service;
 
+import com.yenmai.clinicrestfulapi.entity.BenhNhan;
+import com.yenmai.clinicrestfulapi.entity.NhanVien;
 import com.yenmai.clinicrestfulapi.model.CardInfoDTO;
 import com.yenmai.clinicrestfulapi.model.GroupByValueDTO;
 
@@ -13,5 +15,9 @@ public interface TongQuanService {
 
     public List<GroupByValueDTO> getBenhNhanTheoGioiTinh();
 
-    public   List<GroupByValueDTO> getNhanVienTheoChucVu();
+    public List<GroupByValueDTO> getNhanVienTheoChucVu();
+
+    public List<NhanVien> randomNhanVien();
+
+    public  List<BenhNhan> findBenhNhanMoiNhat();
 }

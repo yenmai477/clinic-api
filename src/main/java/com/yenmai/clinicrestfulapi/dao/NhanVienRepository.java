@@ -17,4 +17,10 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, Integer> {
     List<GroupByResult> groupNhanVienByChucVu();
 
 
+    @Query( value = "select * from NHANVIEN "
+            + "ORDER BY RAND () " +
+            "LIMIT 4", nativeQuery = true)
+    List<NhanVien> randomNhanVien();
+
+
 }

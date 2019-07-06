@@ -28,12 +28,5 @@ public interface PhieuKhamBenhRespository extends JpaRepository<PhieuKhamBenh, I
 
 
 
-    //Thêm một phiếu khám bệnh
-
-
-    //Sửa một phiếu khám bệnh
-
-
-    //Xóa một phiếu khám bệnh
 
 }

@@ -4,7 +4,9 @@ import com.yenmai.clinicrestfulapi.dao.BenhNhanRespository;
 import com.yenmai.clinicrestfulapi.dao.DangKiKhamBenhRespository;
 import com.yenmai.clinicrestfulapi.dao.HoaDonRespository;
 import com.yenmai.clinicrestfulapi.dao.NhanVienRepository;
+import com.yenmai.clinicrestfulapi.entity.BenhNhan;
 import com.yenmai.clinicrestfulapi.entity.HoaDon;
+import com.yenmai.clinicrestfulapi.entity.NhanVien;
 import com.yenmai.clinicrestfulapi.model.CardInfoDTO;
 import com.yenmai.clinicrestfulapi.model.GroupByValueDTO;
 import com.yenmai.clinicrestfulapi.report.model.GroupByResult;
@@ -12,6 +14,7 @@ import com.yenmai.clinicrestfulapi.service.TongQuanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -36,6 +39,7 @@ public class TongQuanServiceImpl implements TongQuanService {
     private HoaDonRespository hoaDonRespository;
 
     @Override
+    @Transactional
     public CardInfoDTO getAllCardInfo() {
 
         CardInfoDTO tempCardInfoDTO = new CardInfoDTO();
@@ -59,6 +63,7 @@ public class TongQuanServiceImpl implements TongQuanService {
     }
 
     @Override
+    @Transactional
     public List<GroupByValueDTO> getDoanhThuTheoThang() {
 
         List<GroupByValueDTO> temGroupByValueDTOList = new ArrayList<>();
@@ -86,6 +91,7 @@ public class TongQuanServiceImpl implements TongQuanService {
     }
 
     @Override
+    @Transactional
     public List<GroupByValueDTO> getBenhNhanTheoGioiTinh() {
         List<GroupByValueDTO> temGroupByValueDTOList = new ArrayList<>();
 
@@ -103,6 +109,7 @@ public class TongQuanServiceImpl implements TongQuanService {
     }
 
     @Override
+    @Transactional
     public List<GroupByValueDTO> getNhanVienTheoChucVu() {
         List<GroupByValueDTO> temGroupByValueDTOList = new ArrayList<>();
 
@@ -118,4 +125,18 @@ public class TongQuanServiceImpl implements TongQuanService {
 
         return temGroupByValueDTOList;
     }
+
+    @Override
+    @Transactional
+    public List<NhanVien> randomNhanVien() {
+        return nhanVienRepository.randomNhanVien();
+    }
+
+    @Override
+    @Transactional
+    public List<BenhNhan> findBenhNhanMoiNhat() {
+        return benhNhanRespository.findBenhNhanMoiNhat();
+    }
+
+
 }
