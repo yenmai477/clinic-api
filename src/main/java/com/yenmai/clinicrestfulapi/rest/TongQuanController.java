@@ -39,6 +39,11 @@ public class TongQuanController {
         return tongQuanService.getNhanVienTheoChucVu();
     }
 
+    @GetMapping("/doanhthumuoihaithang")
+    public List <DoanhThuThangDTO> getDoanhThuMuoiHaiThang() {
+        return tongQuanService.doanhThuMuoiHaiThangQua();
+    }
+
     @GetMapping
     public TongQuanResponseDTO getAll() {
         TongQuanResponseDTO tempResponseDTO = new TongQuanResponseDTO();
