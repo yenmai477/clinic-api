@@ -7,8 +7,7 @@ import com.yenmai.clinicrestfulapi.dao.NhanVienRepository;
 import com.yenmai.clinicrestfulapi.entity.BenhNhan;
 import com.yenmai.clinicrestfulapi.entity.HoaDon;
 import com.yenmai.clinicrestfulapi.entity.NhanVien;
-import com.yenmai.clinicrestfulapi.model.CardInfoDTO;
-import com.yenmai.clinicrestfulapi.model.GroupByValueDTO;
+import com.yenmai.clinicrestfulapi.model.*;
 import com.yenmai.clinicrestfulapi.report.model.GroupByResult;
 import com.yenmai.clinicrestfulapi.service.TongQuanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,9 +63,9 @@ public class TongQuanServiceImpl implements TongQuanService {
 
     @Override
     @Transactional
-    public List<GroupByValueDTO> getDoanhThuTheoThang() {
+    public List<DoanhThuThangDTO> getDoanhThuTheoThang() {
 
-        List<GroupByValueDTO> temGroupByValueDTOList = new ArrayList<>();
+        List<DoanhThuThangDTO> doanhThuThangDTOS = new ArrayList<>();
 
         //Lấy năm hiện tại
         int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -74,33 +73,45 @@ public class TongQuanServiceImpl implements TongQuanService {
         //Lấy giá trị của doanh thu theo từng thánh
 
         for (GroupByResult tempValue : hoaDonRespository.doanhThuTheoThangTrongNam(year)) {
-            GroupByValueDTO tempGroup = new GroupByValueDTO();
-            tempGroup.setName(tempValue.getName());
-            tempGroup.setValue(tempValue.getValue());
-            temGroupByValueDTOList.add(tempGroup);
+            DoanhThuThangDTO tempDTO = new DoanhThuThangDTO();
+            tempDTO.setThang(tempValue.getName());
+            tempDTO.setGiaTri(tempValue.getValue());
+            if(doanhThuThangDTOS.size() > 0){
+
+                // doanh thu từ tháng trước
+                int doanhThuTruoc = doanhThuThangDTOS.get(doanhThuThangDTOS.size() - 1).getGiaTri();
+
+                //Doanh thu từ tháng sau
+                int doanhThuSau  = tempValue.getValue();
+
+                //Tính tỷ lệ
+                float tyle = (float)(doanhThuSau - doanhThuTruoc) / doanhThuTruoc * 100;
+
+                //Làm tròn tỷ lệ thành 2 chữ số thập phân
+                tyle = Math.round(tyle * 100)/100f;
+
+                tempDTO.setTyLe(tyle);
+            }
+            doanhThuThangDTOS.add(tempDTO);
         }
 
-        if(temGroupByValueDTOList.size() == 0) {
-            GroupByValueDTO tempGroup = new GroupByValueDTO();
-            tempGroup.setName("Tháng 1");
-            tempGroup.setValue(0);
-            temGroupByValueDTOList.add(tempGroup);
-        }
 
-        return temGroupByValueDTOList;
+
+        return doanhThuThangDTOS ;
     }
 
     @Override
     @Transactional
-    public List<GroupByValueDTO> getBenhNhanTheoGioiTinh() {
-        List<GroupByValueDTO> temGroupByValueDTOList = new ArrayList<>();
+    public List<GioiTinhDTO> getBenhNhanTheoGioiTinh() {
+        List<GioiTinhDTO> temGroupByValueDTOList = new ArrayList<>();
 
         //Lấy giá trị của doanh thu theo từng giới tính
 
-        for (GroupByResult tempValue : benhNhanRespository.groupBenhNhanByGioiTinh()) {
-            GroupByValueDTO tempGroup = new GroupByValueDTO();
-            tempGroup.setName(tempValue.getName());
-            tempGroup.setValue(tempValue.getValue());
+        for (GroupByGioiTinh tempValue : benhNhanRespository.groupBenhNhanByGioiTinh()) {
+            GioiTinhDTO tempGroup = new GioiTinhDTO();
+            tempGroup.setQuy(tempValue.getQuy());
+            tempGroup.setGioiTinh(tempValue.getGioiTinh());
+            tempGroup.setGiaTri(tempValue.getGiaTri());
             temGroupByValueDTOList.add(tempGroup);
         }
 
@@ -136,6 +147,25 @@ public class TongQuanServiceImpl implements TongQuanService {
     @Transactional
     public List<BenhNhan> findBenhNhanMoiNhat() {
         return benhNhanRespository.findBenhNhanMoiNhat();
+    }
+
+    @Transactional
+    @Override
+    public List<DoanhThuThangDTO> doanhThuMuoiHaiThangQua() {
+
+        List<DoanhThuThangDTO> doanhThuThangDTOS = new ArrayList<>();
+
+        for (GroupByResult tempValue : hoaDonRespository.doanhThuMuoiHaiThangQua()) {
+            DoanhThuThangDTO tempDTO = new DoanhThuThangDTO();
+            tempDTO.setThang(tempValue.getName());
+            tempDTO.setGiaTri(tempValue.getValue());
+
+            //Tính tỷ lệ tạm bỏ qua
+
+            doanhThuThangDTOS.add(tempDTO);
+        }
+
+        return doanhThuThangDTOS;
     }
 
 

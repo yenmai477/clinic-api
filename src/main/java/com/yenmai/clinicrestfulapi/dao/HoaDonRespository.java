@@ -22,4 +22,11 @@ public interface HoaDonRespository extends JpaRepository<HoaDon, Integer> {
             + "order by ngaythem", nativeQuery = true)
     List<HoaDon> findByThangThem(int thangThem, int namThem);
 
+
+    @Query( value = "SELECT  concat(month(ngaythem), '-', year(ngaythem)) as name, SUM(thanhtien) as value\n" +
+            " FROM HoaDon " +
+            " where ngaythem > DATE_SUB( LAST_DAY(NOW()), INTERVAL 12 MONTH) " +
+            " group by  month(ngaythem), year(ngaythem) " +
+            " order by ngaythem;", nativeQuery = true)
+    List<GroupByResult> doanhThuMuoiHaiThangQua();
 }

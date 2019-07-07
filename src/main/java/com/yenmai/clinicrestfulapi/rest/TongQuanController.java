@@ -1,8 +1,6 @@
 package com.yenmai.clinicrestfulapi.rest;
 
-import com.yenmai.clinicrestfulapi.model.CardInfoDTO;
-import com.yenmai.clinicrestfulapi.model.GroupByValueDTO;
-import com.yenmai.clinicrestfulapi.model.TongQuanResponseDTO;
+import com.yenmai.clinicrestfulapi.model.*;
 import com.yenmai.clinicrestfulapi.service.TongQuanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +25,12 @@ public class TongQuanController {
     }
 
     @GetMapping("/doanhthu")
-    public List<GroupByValueDTO> getDoanhThuTheoThang(){
+    public List<DoanhThuThangDTO> getDoanhThuTheoThang(){
         return tongQuanService.getDoanhThuTheoThang();
     }
 
     @GetMapping("/tylegioitinh")
-    public List<GroupByValueDTO> getBenhNhanTheoGioiTinh(){
+    public List<GioiTinhDTO> getBenhNhanTheoGioiTinh(){
         return tongQuanService.getBenhNhanTheoGioiTinh();
     }
 
@@ -50,6 +48,7 @@ public class TongQuanController {
         tempResponseDTO.setTyleGioiTinh(tongQuanService.getBenhNhanTheoGioiTinh());
         tempResponseDTO.setRandomNhanVien(tongQuanService.randomNhanVien());
         tempResponseDTO.setBenhNhanMoi(tongQuanService.findBenhNhanMoiNhat());
+        tempResponseDTO.setDoanhThuMuoiHaiThang(tongQuanService.doanhThuMuoiHaiThangQua());
         return tempResponseDTO;
     }
 

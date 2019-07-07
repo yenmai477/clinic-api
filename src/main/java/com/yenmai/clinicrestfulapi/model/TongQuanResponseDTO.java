@@ -12,15 +12,17 @@ public class TongQuanResponseDTO {
 
     private CardInfoDTO cardInfoDTO;
 
-    private List<GroupByValueDTO> doanhThuTheoThang;
+    private List<DoanhThuThangDTO> doanhThuTheoThang;
 
-    private  List<GroupByValueDTO> tyleGioiTinh;
+    private  List<GioiTinhDTO> tyleGioiTinh;
 
     private List<GroupByValueDTO> tyleChucVu;
 
     private List<NhanVien> randomNhanVien;
 
     private  List<BenhNhan> benhNhanMoi;
+
+    private  List<DoanhThuThangDTO> doanhThuMuoiHaiThang;
 
 
     public TongQuanResponseDTO() {
@@ -34,19 +36,19 @@ public class TongQuanResponseDTO {
         this.cardInfoDTO = cardInfoDTO;
     }
 
-    public List<GroupByValueDTO> getDoanhThuTheoThang() {
+    public List<DoanhThuThangDTO> getDoanhThuTheoThang() {
         return doanhThuTheoThang;
     }
 
-    public void setDoanhThuTheoThang(List<GroupByValueDTO> doanhThuTheoThang) {
+    public void setDoanhThuTheoThang(List<DoanhThuThangDTO> doanhThuTheoThang) {
         this.doanhThuTheoThang = doanhThuTheoThang;
     }
 
-    public List<GroupByValueDTO> getTyleGioiTinh() {
+    public List<GioiTinhDTO> getTyleGioiTinh() {
         return tyleGioiTinh;
     }
 
-    public void setTyleGioiTinh(List<GroupByValueDTO> tyleGioiTinh) {
+    public void setTyleGioiTinh(List<GioiTinhDTO> tyleGioiTinh) {
         this.tyleGioiTinh = tyleGioiTinh;
     }
 
@@ -72,5 +74,14 @@ public class TongQuanResponseDTO {
 
     public void setBenhNhanMoi(List<BenhNhan> benhNhanMoi) {
         this.benhNhanMoi = benhNhanMoi;
+    }
+
+    public List<DoanhThuThangDTO> getDoanhThuMuoiHaiThang() {
+
+        return doanhThuMuoiHaiThang;
+    }
+
+    public void setDoanhThuMuoiHaiThang(List<DoanhThuThangDTO> doanhThuMuoiHaiThang) {
+        this.doanhThuMuoiHaiThang = doanhThuMuoiHaiThang;
     }
 }

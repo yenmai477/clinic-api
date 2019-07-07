@@ -26,6 +26,9 @@ public class DangKiKhamBenhServiceImpl implements DangKiKhamBenhService {
     @Transactional
     public List<DangKiKhamBenh> findAll() {
 
+        //return dangKiKhamBenhRespository.findAll(new Sort(Sort.Direction.DESC, "ngayDangKi")
+                //.and(new Sort(Sort.Direction.DESC, "tinhTrang")));
+
         return dangKiKhamBenhRespository.findAll();
     }
 

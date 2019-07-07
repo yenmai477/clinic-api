@@ -1,7 +1,7 @@
 package com.yenmai.clinicrestfulapi.dao;
 
 import com.yenmai.clinicrestfulapi.entity.BenhNhan;
-import com.yenmai.clinicrestfulapi.report.model.GroupByResult;
+import com.yenmai.clinicrestfulapi.model.GroupByGioiTinh;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,10 +16,12 @@ public interface BenhNhanRespository extends JpaRepository<BenhNhan, Integer> {
     List<BenhNhan>findBenhNhanByThangThem(int thangThem, int namThem);
 
 
-    @Query( value = "select GioiTinh as name, COUNT(MaBenhNhan) as value "
-            + "from BENHNHAN "
-            + "group by name ", nativeQuery = true)
-    List<GroupByResult> groupBenhNhanByGioiTinh();
+    @Query( value = "select quarter(ngaythem) as quy ,GIOITINH as gioiTinh, " +
+            " count(MABENHNHAN) as giaTri from benhnhan" +
+            " where year(ngaythem) = year(now())" +
+            " group by quy, gioitinh" +
+            " order by quy;", nativeQuery = true)
+    List<GroupByGioiTinh> groupBenhNhanByGioiTinh();
 
 
     @Query( value = "select  * from BENHNHAN order by ngaythem desc limit 10",
