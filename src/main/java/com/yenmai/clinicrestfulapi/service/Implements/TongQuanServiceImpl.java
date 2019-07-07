@@ -78,17 +78,17 @@ public class TongQuanServiceImpl implements TongQuanService {
             tempDTO.setGiaTri(tempValue.getValue());
             if(doanhThuThangDTOS.size() > 0){
 
-                // doanh thu từ tháng trước
-                int doanhThuTruoc = doanhThuThangDTOS.get(doanhThuThangDTOS.size() - 1).getGiaTri();
+                    // doanh thu từ tháng trước
+                    int doanhThuTruoc = doanhThuThangDTOS.get(doanhThuThangDTOS.size() - 1).getGiaTri();
 
-                //Doanh thu từ tháng sau
-                int doanhThuSau  = tempValue.getValue();
+                    //Doanh thu từ tháng sau
+                    int doanhThuSau  = tempValue.getValue();
 
-                //Tính tỷ lệ
-                float tyle = (float)(doanhThuSau - doanhThuTruoc) / doanhThuTruoc * 100;
+                    //Tính tỷ lệ
+                    float tyle = (float)(doanhThuSau - doanhThuTruoc) / doanhThuTruoc * 100;
 
-                //Làm tròn tỷ lệ thành 2 chữ số thập phân
-                tyle = Math.round(tyle * 100)/100f;
+                    //Làm tròn tỷ lệ thành 2 chữ số thập phân
+                    tyle = Math.round(tyle * 100)/100f;
 
                 tempDTO.setTyLe(tyle);
             }
@@ -161,8 +161,25 @@ public class TongQuanServiceImpl implements TongQuanService {
             tempDTO.setGiaTri(tempValue.getValue());
 
             //Tính tỷ lệ tạm bỏ qua
+            if(doanhThuThangDTOS.size() > 0) {
 
-            doanhThuThangDTOS.add(tempDTO);
+                // doanh thu từ tháng trước
+                int doanhThuTruoc = doanhThuThangDTOS.get(doanhThuThangDTOS.size() - 1).getGiaTri();
+
+                //Doanh thu từ tháng sau
+                int doanhThuSau = tempValue.getValue();
+
+                //Tính tỷ lệ
+                float tyle = (float) (doanhThuSau - doanhThuTruoc) / doanhThuTruoc * 100;
+
+                //Làm tròn tỷ lệ thành 2 chữ số thập phân
+                tyle = Math.round(tyle * 100) / 100f;
+
+                tempDTO.setTyLe(tyle);
+            }
+
+
+                doanhThuThangDTOS.add(tempDTO);
         }
 
         return doanhThuThangDTOS;
