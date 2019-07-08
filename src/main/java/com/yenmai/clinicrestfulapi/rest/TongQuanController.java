@@ -1,5 +1,7 @@
 package com.yenmai.clinicrestfulapi.rest;
 
+import com.yenmai.clinicrestfulapi.entity.BenhNhan;
+import com.yenmai.clinicrestfulapi.entity.NhanVien;
 import com.yenmai.clinicrestfulapi.model.*;
 import com.yenmai.clinicrestfulapi.service.TongQuanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,16 @@ public class TongQuanController {
     @GetMapping("/doanhthumuoihaithang")
     public List <DoanhThuThangDTO> getDoanhThuMuoiHaiThang() {
         return tongQuanService.doanhThuMuoiHaiThangQua();
+    }
+
+    @GetMapping("/nhanvientieubieu")
+    public List <NhanVien> randomNhanVien() {
+        return tongQuanService.randomNhanVien();
+    }
+
+    @GetMapping("/nhanvientieubieu")
+    public List <BenhNhan> getBenhNhanMoi() {
+        return tongQuanService.findBenhNhanMoiNhat();
     }
 
     @GetMapping
