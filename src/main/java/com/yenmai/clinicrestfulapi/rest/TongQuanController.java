@@ -51,7 +51,7 @@ public class TongQuanController {
         return tongQuanService.randomNhanVien();
     }
 
-    @GetMapping("/nhanvientieubieu")
+    @GetMapping("/benhnhanmoi")
     public List <BenhNhan> getBenhNhanMoi() {
         return tongQuanService.findBenhNhanMoiNhat();
     }
